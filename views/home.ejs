@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        font-family: Arial;
+      }
+      .head {
+        display: flex;
+        justify-content: center;
+        font-size: 2.2rem;
+        color: rgb(1, 117, 155);
+      }
+      .box {
+        padding-bottom: 50px;
+        width: 70%;
+        max-height: 500px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+      }
+      #fname {
+        display: table-cell;
+        width: 100%;
+        height: 56px;
+        padding: 10px 16px;
+        font: 17px lato, arial;
+        color: #000;
+        background: #fff;
+        border: 1px solid #bbb;
+        border-right: 0;
+        border-radius: 3px;
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+        box-sizing: border-box;
+      }
+      #b1 {
+        height: 56px;
+        color: aliceblue;
+        background-color: rgb(1, 117, 155);
+        margin-left: -5px;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      h2 {
+        font-weight: 800;
+      }
+      .p2 {
+        margin: -6px 0;
+        text-align: center;
+      }
+      .box2 {
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="head">ShortURL</h1>
+    <div class="container">
+      <div class="box">
+        <h2>Paste your URL to be shortened</h2>
+        <form class="box2" method="post" action="/url">
+          <input type="text" id="fname" name="url" placeholder="Enter the link here" />
+          <button id="b1">Shorten URL</button>
+        </form>
+        <p class="p1">ShortURL is a free tool to shorten URLs and generate short links</p>
+        <p class="p2">URL shortener allows to create a shortened link making it easy to share</p>
+        <% if(locals.id) { %>
+          <p>URL generated: http://localhost/url/<%= id %></p>
+        <% } %>
+        <% if (locals.urls) { %>
+          <table>
+            <thead>
+              <tr>
+                <th>S. No</th>
+                <th>ShortID</th>
+                <th>Redirect</th>
+                <th>Clicks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% urls.forEach((url, index) => { %>
+                <tr>
+                  <td><%= index + 1 %></td>
+                  <td><%= url.shortId %></td>
+                  <td><%= url.redirectURL %></td>
+                  <td><%= url.visitHistory.length %></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>
